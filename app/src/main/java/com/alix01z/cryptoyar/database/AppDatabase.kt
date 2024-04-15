@@ -6,8 +6,10 @@ import androidx.room.TypeConverters
 import com.alix01z.cryptoyar.database.converters.AllMarketModelConverter
 import com.alix01z.cryptoyar.database.entities.MarketListEntity
 
-@TypeConverters(AllMarketModelConverter::class)
+
 @Database(entities = [MarketListEntity::class] , version = 1)
+@TypeConverters(AllMarketModelConverter::class)
+//@TypeConverters(AllMarketModelConverter::class)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun roomDao(): RoomDao
 }

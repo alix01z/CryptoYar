@@ -12,7 +12,6 @@ import androidx.navigation.ui.NavigationUI
 import com.alix01z.cryptoyar.databinding.ActivityMainBinding
 import com.alix01z.cryptoyar.viewmodels.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -27,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(AppViewModel::class.java)
 
 
-        viewModel.marketDataLD.observe(this) { response ->
+        viewModel.fetchedMarketData.observe(this) { response ->
             if (response != null) {
                 if (response.isSuccessful) {
                     val data = response.body()
@@ -42,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupNavigationComponent()
+
     }
 
     private fun setupNavigationComponent(){
@@ -61,4 +61,5 @@ class MainActivity : AppCompatActivity() {
         binding.bottomBar.setupWithNavController(menu , navController)
 
     }
+
 }

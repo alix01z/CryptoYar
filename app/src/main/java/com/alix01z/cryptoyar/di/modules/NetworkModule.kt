@@ -1,5 +1,6 @@
 package com.alix01z.cryptoyar.di.modules
 
+import com.alix01z.cryptoyar.database.RoomDao
 import com.alix01z.cryptoyar.network.RequestAPI
 import com.alix01z.cryptoyar.repository.AppRepository
 import dagger.Module
@@ -13,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object HiltNetworkModule {
+object NetworkModule {
     val BASE_URL = "https://api.coinmarketcap.com/"
 
     @Provides
@@ -49,7 +50,7 @@ object HiltNetworkModule {
 
     @Provides
     @Singleton
-    fun provideAppRepository(requestAPI: RequestAPI): AppRepository{
-        return AppRepository(requestAPI)
+    fun provideAppRepository(requestAPI: RequestAPI , roomDao: RoomDao): AppRepository{
+        return AppRepository(requestAPI , roomDao)
     }
 }

@@ -7,9 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alix01z.cryptoyar.R
+import com.alix01z.cryptoyar.database.entities.MarketListEntity
 import com.alix01z.cryptoyar.models.AllMarketModel
 import com.alix01z.cryptoyar.repository.AppRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
@@ -23,18 +25,23 @@ class AppViewModel
     private val application: Application
 ): ViewModel() {
 
-    private val vPMutableData : MutableLiveData<List<Int>> = MutableLiveData()
-    val vPLiveData : LiveData<List<Int>> = vPMutableData
+    private val _viewPagerData = MutableLiveData<List<Int>>()
+    val viewPagerData : LiveData<List<Int>> = _viewPagerData
 
-    private val marketDataMutableLD = MutableLiveData<Response<AllMarketModel>>()
-    val marketDataLD: LiveData<Response<AllMarketModel>> = marketDataMutableLD
+    private val _fetchedMarketData = MutableLiveData<Response<AllMarketModel>>()
+    val fetchedMarketData: LiveData<Response<AllMarketModel>> = _fetchedMarketData
 
     private val _errorMessages = MutableLiveData<String>()
+
+    private val _marketDataDB = MutableLiveData<MarketListEntity>()
+    val marketDataDB : LiveData<MarketListEntity> = _marketDataDB
+
     val errorMessages: LiveData<String> get() = _errorMessages
 
     init {
         getViewPagerData()
         loadDataPeriodically()
+        getAllMarketDataDB()
     }
 
     fun getViewPagerData() : MutableLiveData<List<Int>> {
@@ -43,8 +50,8 @@ class AppViewModel
             R.drawable.crypto2,
             R.drawable.crypto3
         )
-        vPMutableData.postValue(drawableList)
-        return vPMutableData
+        _viewPagerData.postValue(drawableList)
+        return _viewPagerData
     }
 
     private fun loadDataPeriodically(){
@@ -61,9 +68,16 @@ class AppViewModel
             try {
                 val response = repository.fetchMarketData()
                 response?.let {
-                    marketDataMutableLD.postValue(it)
+                    _fetchedMarketData.postValue(it)
                     if (it.isSuccessful) {
                         val marketData = it.body()
+                        if (marketData != null){
+                            val marketEntity = MarketListEntity(0 , marketData)
+                            insertMarketDataDB(marketEntity)
+                        }
+//                        if (marketData != null){
+//                            insertMarketDataDB(marketData)
+//                        }
                         // Use marketData here (parsed data)
                     } else {
                         // Handle network error
@@ -74,6 +88,21 @@ class AppViewModel
                 // Handle exception
                 Log.e("ViewModel", "Error loading market data: ${e.message}", e)
                 _errorMessages.postValue("Error loading market data")
+            }
+        }
+    }
+
+    fun insertMarketDataDB(marketModel: MarketListEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertMarketData(marketModel)
+        }
+
+    }
+
+    fun getAllMarketDataDB(){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.getAllMarketData().collect(){
+                _marketDataDB.postValue(it)
             }
         }
     }

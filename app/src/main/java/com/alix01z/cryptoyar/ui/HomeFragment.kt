@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
         setupViewPager()
         Log.d("TAG", "HEELLLLLLLOOOO")
 
+        readAllDataDB()
 
 
         return binding.root
@@ -74,6 +75,11 @@ class HomeFragment : Fragment() {
             binding.vpagerHome.adapter = ViewPagerHomeAdapter(it)
             binding.vpagerHome.offscreenPageLimit = 3
             binding.wormDotIndicHome.attachTo(binding.vpagerHome)
+        }
+    }
+    private fun readAllDataDB(){
+        viewModel.marketDataDB.observe(viewLifecycleOwner) {
+            Log.d("DATABASE", "readAllDataDB: + ${it.allMarketModel.data.cryptoCurrencyList.get(0).quotes.get(0).price} ")
         }
     }
 }
