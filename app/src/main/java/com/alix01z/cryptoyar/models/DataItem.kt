@@ -26,9 +26,6 @@ data class DataItem(
     @SerializedName("circulatingSupply")
     val circulatingSupply: Double,
 
-    @SerializedName("selfReportedCirculatingSupply")
-    val selfReportedCirculatingSupply: Int,
-
     @SerializedName("totalSupply")
     val totalSupply: Double,
 
@@ -70,7 +67,6 @@ data class DataItem(
         parcel.readInt(),
         parcel.readInt(),
         parcel.readDouble(),
-        parcel.readInt(),
         parcel.readDouble(),
         parcel.readDouble(),
         parcel.readDouble(),
@@ -93,7 +89,6 @@ data class DataItem(
         parcel.writeInt(cmcRank)
         parcel.writeInt(marketPairCount)
         parcel.writeDouble(circulatingSupply)
-        parcel.writeInt(selfReportedCirculatingSupply)
         parcel.writeDouble(totalSupply)
         parcel.writeDouble(maxSupply)
         parcel.writeDouble(ath)

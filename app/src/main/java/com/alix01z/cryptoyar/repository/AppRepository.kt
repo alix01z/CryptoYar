@@ -1,8 +1,6 @@
 package com.alix01z.cryptoyar.repository
 
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.alix01z.cryptoyar.database.RoomDao
 import com.alix01z.cryptoyar.database.entities.MarketListEntity
 import com.alix01z.cryptoyar.models.AllMarketModel
@@ -26,8 +24,8 @@ class AppRepository
         }
     }
     // >>DATABASE<< Functions
-    suspend fun insertMarketData(marketModel: MarketListEntity){
-        roomDao.insert(marketModel)
+    suspend fun insertMarketData(markeEntity: MarketListEntity){
+        roomDao.insert(markeEntity)
     }
 
     fun getAllMarketData():Flow<MarketListEntity>{

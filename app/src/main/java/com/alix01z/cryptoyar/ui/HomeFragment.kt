@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -16,10 +17,13 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alix01z.cryptoyar.MainActivity
 import com.alix01z.cryptoyar.R
+import com.alix01z.cryptoyar.adapters.TopCoinRvAdapter
 import com.alix01z.cryptoyar.adapters.ViewPagerHomeAdapter
 import com.alix01z.cryptoyar.databinding.FragmentHomeBinding
+import com.alix01z.cryptoyar.models.DataItem
 import com.alix01z.cryptoyar.viewmodels.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -79,7 +83,18 @@ class HomeFragment : Fragment() {
     }
     private fun readAllDataDB(){
         viewModel.marketDataDB.observe(viewLifecycleOwner) {
-            Log.d("DATABASE", "readAllDataDB: + ${it.allMarketModel.data.cryptoCurrencyList.get(0).quotes.get(0).price} ")
+            val coinList = ArrayList<DataItem>()
+            it?.allMarketModel?.data?.cryptoCurrencyList?.forEach {
+                coinList.add(it)
+            }
+        updateRecyclerView(coinList)
+//            Log.d("DATABASE", "readAllDataDB: + ${it.allMarketModel.data.cryptoCurrencyList.get(0).quotes.get(0).price} ")
         }
+    }
+    private fun updateRecyclerView(coinList: ArrayList<DataItem>) {
+        val adapter = TopCoinRvAdapter(coinList)
+        binding.rvTopCoin.adapter = adapter
+        binding.rvTopCoin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        Toast.makeText(context , "Top coins Updated!", Toast.LENGTH_SHORT).show()
     }
 }

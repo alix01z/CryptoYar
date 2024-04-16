@@ -7,7 +7,7 @@ import com.alix01z.cryptoyar.database.converters.AllMarketModelConverter
 import com.alix01z.cryptoyar.database.entities.MarketListEntity
 
 
-@Database(entities = [MarketListEntity::class] , version = 1)
+@Database(entities = [MarketListEntity::class] , version = 2)
 @TypeConverters(AllMarketModelConverter::class)
 //@TypeConverters(AllMarketModelConverter::class)
 abstract class AppDatabase: RoomDatabase() {
