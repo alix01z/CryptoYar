@@ -36,7 +36,7 @@ class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.A
             binding.topCoinChange.text = if (coinData.quotes[0].percentChange24h > 0) {
                 String.format("+%.2f%%", coinData.quotes[0].percentChange24h)
             } else {
-                String.format("+%.2f%%", coinData.quotes[0].percentChange24h)
+                String.format("%.2f%%", coinData.quotes[0].percentChange24h)
             }
             binding.executePendingBindings()
         }
@@ -60,5 +60,10 @@ class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.A
             }
         }
 
+    }
+    fun updateData(newData: List<DataItem>) {
+        coinList.clear()
+        coinList.addAll(newData)
+        notifyDataSetChanged()
     }
 }

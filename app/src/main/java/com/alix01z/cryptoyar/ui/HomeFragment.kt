@@ -69,7 +69,6 @@ class HomeFragment : Fragment() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.homeFragment) {
-                toolbar.setNavigationIcon(R.drawable.baseline_home_24)
                 toolbar.title = "خانه"
             }
         }
@@ -87,14 +86,17 @@ class HomeFragment : Fragment() {
             it?.allMarketModel?.data?.cryptoCurrencyList?.forEach {
                 coinList.add(it)
             }
-        updateRecyclerView(coinList)
+            if (binding.rvTopCoin.adapter == null){
+                val adapter = TopCoinRvAdapter(coinList)
+                binding.rvTopCoin.adapter = adapter
+                binding.rvTopCoin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            }
+            else{
+                val adapter = binding.rvTopCoin.adapter as TopCoinRvAdapter
+                adapter.updateData(coinList)
+                Toast.makeText(context , "Top coins Updated!", Toast.LENGTH_SHORT).show()
+            }
 //            Log.d("DATABASE", "readAllDataDB: + ${it.allMarketModel.data.cryptoCurrencyList.get(0).quotes.get(0).price} ")
         }
-    }
-    private fun updateRecyclerView(coinList: ArrayList<DataItem>) {
-        val adapter = TopCoinRvAdapter(coinList)
-        binding.rvTopCoin.adapter = adapter
-        binding.rvTopCoin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        Toast.makeText(context , "Top coins Updated!", Toast.LENGTH_SHORT).show()
     }
 }

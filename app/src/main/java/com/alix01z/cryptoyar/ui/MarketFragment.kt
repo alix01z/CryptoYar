@@ -46,7 +46,6 @@ class MarketFragment : Fragment() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.marketFragment) {
-                toolbar.setNavigationIcon(R.drawable.baseline_bar_chart_24)
                 toolbar.title = "بازار"
             }
         }

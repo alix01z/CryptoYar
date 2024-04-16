@@ -48,7 +48,6 @@ class WatchlistFragment : Fragment() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.watchlistFragment) {
-                toolbar.setNavigationIcon(R.drawable.baseline_bookmark_24)
                 toolbar.title = "واچ لیست"
             }
         }
