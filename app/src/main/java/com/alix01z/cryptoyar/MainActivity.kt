@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this , R.layout.activity_main)
         drawerLayout = binding.drawerLayout
-        viewModel = ViewModelProvider(this).get(AppViewModel::class.java)
+        viewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
 
         viewModel.fetchedMarketData.observe(this) { response ->

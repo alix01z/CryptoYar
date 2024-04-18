@@ -8,8 +8,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="150dp"
-        android:layout_height="100dp">
+        android:layout_width="match_parent"
+        android:layout_height="72dp">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardvTopCoin"
@@ -27,42 +27,70 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/imgvCoinLogo"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:id="@+id/topCoinLogo"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="10dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/topCoinName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
                     android:id="@+id/topCoinChange"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="TextView"
+                    android:layout_marginEnd="16dp"
+                    android:text="change%"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topCoinPrice" />
 
                 <TextView
                     android:id="@+id/topCoinPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="TextView"
+                    android:layout_marginEnd="16dp"
+                    android:text="price"
                     app:layout_constraintBottom_toTopOf="@+id/topCoinChange"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/topCoinName"
-                    app:layout_constraintVertical_bias="0.454" />
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/topCoinSymbol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="symbol"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/topCoinLogo"
+                    app:layout_constraintTop_toBottomOf="@+id/topCoinName" />
+
+                <TextView
+                    android:id="@+id/topCoinName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="name"
+                    app:layout_constraintBottom_toTopOf="@+id/topCoinSymbol"
+                    app:layout_constraintStart_toEndOf="@+id/topCoinLogo"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/topCoinChart"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.7" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

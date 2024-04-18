@@ -2,8 +2,8 @@
     <string name="app_name">CryptoYar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="menu_item_home">خانه</string>
-    <string name="menu_item_market">بازار</string>
-    <string name="menu_item_watchlist">واچ لیست</string>
-    <string name="profile">پروفایل</string>
+    <string name="menu_item_home">Home</string>
+    <string name="menu_item_market">Market</string>
+    <string name="menu_item_watchlist">Watchlist</string>
+    <string name="profile">Profile</string>
 </resources>

@@ -9,6 +9,7 @@ import com.alix01z.cryptoyar.R
 import com.alix01z.cryptoyar.databinding.ItemRvTopCoinBinding
 import com.alix01z.cryptoyar.models.DataItem
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.Adapter<TopCoinRvAdapter.TopCoinRvViewHolder>() {
 
@@ -30,9 +31,11 @@ class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.A
 
         fun bindData(coinData:DataItem){
             setCoinLogo(coinData)
+            setCoinChart(coinData)
             setTextColor(coinData)
             setDecimalsForPrice(coinData)
-            binding.topCoinName.text = String.format("%s/USD", coinData.symbol)
+            binding.topCoinName.text = coinData.name
+            binding.topCoinSymbol.text = String.format("%s/USD", coinData.symbol)
             binding.topCoinChange.text = if (coinData.quotes[0].percentChange24h > 0) {
                 String.format("+%.2f%%", coinData.quotes[0].percentChange24h)
             } else {
@@ -42,14 +45,24 @@ class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.A
         }
         private fun setCoinLogo(coinData: DataItem) {
             Glide.with(binding.root)
-                .load("https://s2.coinmarketcap.com/static/img/coins/32x32/" + coinData.id + ".png")
-                .placeholder(R.drawable.baseline_bookmark_24)
-                .into(binding.imgvCoinLogo)
+                .load("https://s2.coinmarketcap.com/static/img/coins/64x64/" + coinData.id + ".png")
+                .thumbnail(Glide.with(binding.root).load(R.drawable.baseline_bar_chart_24))
+                .into(binding.topCoinLogo)
+        }
+        private fun setCoinChart(coinData: DataItem){
+            Glide.with(binding.root)
+                .load("https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/" + coinData.id + ".png")
+                //Transition is used for loading animation
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(binding.topCoinChart)
         }
         private fun setTextColor(coinData: DataItem){
             val percentChange = coinData.quotes[0].percentChange24h
-            binding.topCoinChange.setTextColor(if (percentChange < 0) Color.RED else Color.GREEN)
-            binding.topCoinPrice.setTextColor(if (percentChange < 0) Color.RED else Color.GREEN)
+            binding.apply {
+                topCoinChange.setTextColor(if (percentChange < 0) Color.RED else Color.GREEN)
+                topCoinPrice.setTextColor(if (percentChange < 0) Color.RED else Color.GREEN)
+                topCoinChart.setColorFilter(if (percentChange < 0) Color.RED else Color.GREEN)
+            }
         }
         private fun setDecimalsForPrice(coinEntity: DataItem){
             val price = coinEntity.quotes[0].price
@@ -66,4 +79,5 @@ class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.A
         coinList.addAll(newData)
         notifyDataSetChanged()
     }
+
 }

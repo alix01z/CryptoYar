@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
             if (binding.rvTopCoin.adapter == null){
                 val adapter = TopCoinRvAdapter(coinList)
                 binding.rvTopCoin.adapter = adapter
-                binding.rvTopCoin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                binding.rvTopCoin.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             }
             else{
                 val adapter = binding.rvTopCoin.adapter as TopCoinRvAdapter
