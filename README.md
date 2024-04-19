@@ -1,2 +1,2 @@
 ---
-### :woman_technologist: About Me :
+### CryotoYar
