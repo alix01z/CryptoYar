@@ -28,7 +28,7 @@ class ViewPagerHomeAdapter(private val imageList: List<Int>) : RecyclerView.Adap
     class ViewPagerHomeViewHolder(private val binding: ItemVpagerHomeBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(image: Int) {
-            binding.viewfading.visibility = View.VISIBLE
+//            binding.viewfading.visibility = View.VISIBLE
             Glide.with(binding.root.context)
                 .load(image)
                 //diskCache is used to cache the images

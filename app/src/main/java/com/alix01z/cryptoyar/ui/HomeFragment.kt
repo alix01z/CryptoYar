@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
         readAllDataDB()
 
 
+
         return binding.root
     }
 

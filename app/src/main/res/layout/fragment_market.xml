@@ -14,6 +14,7 @@
         tools:context=".ui.MarketFragment">
 
         <include
+            android:id="@+id/include2"
             layout="@layout/appbarlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,5 +30,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editextSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:ems="10"
+            android:inputType="text"
+            android:text="Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -47,6 +47,7 @@ class TopCoinRvAdapter(private val coinList:ArrayList<DataItem>): RecyclerView.A
             Glide.with(binding.root)
                 .load("https://s2.coinmarketcap.com/static/img/coins/64x64/" + coinData.id + ".png")
                 .thumbnail(Glide.with(binding.root).load(R.drawable.baseline_bar_chart_24))
+                .circleCrop()
                 .into(binding.topCoinLogo)
         }
         private fun setCoinChart(coinData: DataItem){

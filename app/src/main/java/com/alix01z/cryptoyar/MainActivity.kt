@@ -12,6 +12,13 @@ import androidx.navigation.ui.NavigationUI
 import com.alix01z.cryptoyar.databinding.ActivityMainBinding
 import com.alix01z.cryptoyar.viewmodels.AppViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.jsoup.Jsoup
+import org.jsoup.nodes.Document
+import org.jsoup.nodes.Element
+import org.jsoup.select.Elements
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,6 +32,8 @@ class MainActivity : AppCompatActivity() {
         drawerLayout = binding.drawerLayout
         viewModel = ViewModelProvider(this)[AppViewModel::class.java]
 
+
+        callMarketSummary()
 
         viewModel.fetchedMarketData.observe(this) { response ->
             if (response != null) {
@@ -60,6 +69,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomBar.setupWithNavController(menu , navController)
 
+    }
+    private fun callMarketSummary(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val pageSrc :Document = Jsoup.connect("https://coinmarketcap.com/").get()
+            val scrapeMarketSum: Elements = pageSrc.getElementsByClass("sc-f70bb44c-0 iQEJet cmc-link")
+            Log.e("JSOUP",  "callMarketSummary: " + scrapeMarketSum.text())
+        }
     }
 
 }
