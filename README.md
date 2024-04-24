@@ -10,7 +10,7 @@ Techs & Tools used in this project:
 * MVVM
 * Single Acitvity (Navigation Component)
 * REST API: @CoinMarketCap
-* Html-EmbedCode : @TradingView
+* @TradingView charts
 * Retrofit & OkHttp
 * Hilt (Dependency Injection)
 * Coroutine & Flow
