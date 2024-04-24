@@ -1,21 +1,23 @@
-# Todo
+# CryptoYar
 
-Easily manage tasks and stay organized with this intuitive todo app.
-
-### ScreenShots
-
-# About the Project
+Stay updated with live cryptocurrency prices, charts, and market changes.
 
 
 
 # Features
 Techs & Tools used in this project:
 * Kotlin
-* Architectural & Design Patterns: MVVM , Single Acitvity , Dependency Injection
-* Hilt
-* Coroutine
+* MVVM
+* Single Acitvity (Navigation Component)
+* REST API: @CoinMarketCap
+* Html-EmbedCode : @TradingView
+* Retrofit & OkHttp
+* Hilt (Dependency Injection)
+* Coroutine & Flow
+* UI/UX: XML , Material Design , Figma
+* ViewModel & LiveData
 * Room DataBase
-* Navigtion Component
 * DataBinding
-* ViewModel
 * Lottie
+* BottomSheetBar
+* DataStore (Soon!)
