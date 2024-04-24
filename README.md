@@ -1,4 +1,3 @@
----
 # Todo
 
 Easily manage tasks and stay organized with this intuitive todo app.
